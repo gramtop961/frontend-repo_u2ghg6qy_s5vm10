@@ -1,25 +1,29 @@
 import { useState } from 'react'
+import Header from './components/Header'
+import GratitudeForm from './components/GratitudeForm'
+import GratitudeList from './components/GratitudeList'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [refreshKey, setRefreshKey] = useState(0)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-sky-50 to-emerald-50">
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <Header />
+
+        <div className="mt-8 grid md:grid-cols-2 gap-8">
+          <div className="bg-white/80 backdrop-blur rounded-2xl shadow-sm border border-gray-200 p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Add todays gratitude</h2>
+            <GratitudeForm onSubmitted={() => setRefreshKey(k => k + 1)} />
+          </div>
+
+          <div className="bg-white/80 backdrop-blur rounded-2xl shadow-sm border border-gray-200 p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Recent entries</h2>
+            <GratitudeList refreshKey={refreshKey} />
+          </div>
         </div>
+
+        <p className="text-center text-xs text-gray-500 mt-8">Built with love • Share a little gratitude each day</p>
       </div>
     </div>
   )
